@@ -14,12 +14,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {HttpClientModule} from '@angular/common/http';
 import {BooksService} from './books/books.service';
 import {MatListModule} from '@angular/material/list';
+import { BorrowComponent } from './borrow/borrow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BooksComponent
+    BooksComponent,
+    BorrowComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +35,7 @@ import {MatListModule} from '@angular/material/list';
     MatMenuModule,
     MatListModule
   ],
-  providers: [
-  ],
+  providers: [BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

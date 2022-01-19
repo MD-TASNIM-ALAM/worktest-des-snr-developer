@@ -9,12 +9,10 @@ import {Observable} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  books: Observable<Book[]>;
+  title = 'Books';
 
-  constructor(private booksService: BooksService) {
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.books = this.booksService.getBooks();
   }
 }

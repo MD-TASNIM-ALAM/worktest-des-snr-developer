@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using des_library_api.Domain;
 using des_library_api.Infra.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -13,20 +15,29 @@ namespace des_library_api.Controllers
 
         public BookController()
         {
-            var bs = new[]
-            {
-                new Book { Id = 1, Name = "Clean Code: A Handbook of Agile Software Craftsmanship", Author = "Robert C. Martin", Language = "English", Pages = 464 },
-                new Book { Id = 2, Name = "Test Driven Development: By Example", Author = "Kent Beck", Language = "English", Pages = 240},
-                new Book { Id = 1, Name = "Design Patterns: Elements of Reusable Object-Oriented Software", Author = "Erich Gamma; Richard Helm; Ralph Johnson; John Vlissides", Language = "English", Pages = 416},
-                new Book { Id = 1, Name = "Angular in Action", Author = "Jeremy Wilken", Language = "English", Pages = 320}
-            };
-            _bookRepository = new BookRepository(bs);
+            _bookRepository = new BookRepository();
         }
 
-        [HttpPost]
+        [HttpGet]
         public IEnumerable<Book> Get()
         {
             return _bookRepository.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public Book Get([FromRoute] int id)
+        {
+            return _bookRepository.Get(id);
+        }
+
+        [HttpPut("{id}")]
+        public IEnumerable<Book> BorrowBook([FromRoute] long id, [FromBody] Book book)
+        {
+            if (id != book.Id)
+            {
+                return (IEnumerable<Book>)NotFound();
+            }
+            return _bookRepository.BorrowBook(book);
         }
     }
 }
