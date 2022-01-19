@@ -25,7 +25,7 @@ namespace des_library_api.Controllers
         }
 
         [HttpGet("{id}")]
-        public Book Get([FromRoute] int id)
+        public Book GetBook([FromRoute] int id)
         {
             return _bookRepository.Get(id);
         }

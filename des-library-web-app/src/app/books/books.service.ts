@@ -12,7 +12,7 @@ export class BooksService {
     })
   };
   constructor(private http: HttpClient) {
-    this.apiUrl = 'https://localhost:5000/book';
+    this.apiUrl = 'https://localhost:5000/book/';
    }
 
   getBooks(): Observable<Book[]> {
@@ -22,6 +22,6 @@ export class BooksService {
     return this.http.get<Book>(this.apiUrl + id);
   }
   borrowBook(id:number, book:Book): Observable<Book[]> {
-    return this.http.put<Book[]>(this.apiUrl  +id, JSON.stringify(book), this.httpOptions);
+    return this.http.put<Book[]>(this.apiUrl  + id, JSON.stringify(book), this.httpOptions);
   }
 }

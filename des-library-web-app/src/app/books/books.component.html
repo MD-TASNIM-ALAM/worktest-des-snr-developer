@@ -1,5 +1,5 @@
 <mat-list role="list">
     <mat-list-item *ngFor="let book of books | async" role="listitem">
-      {{book.name}} <button  mat-button><a [routerLink]="['/book', book.ID]"> {{ book.Status == null || book.Status == 'Borrowed' ? 'Borrow': 'Return' }} </a></button>
+      {{book.name}} <button  mat-button><a [routerLink]="['/borrow', book.id]"> {{ book.Status == null? 'Borrow': 'Return' }} </a></button>
     </mat-list-item>
 </mat-list>

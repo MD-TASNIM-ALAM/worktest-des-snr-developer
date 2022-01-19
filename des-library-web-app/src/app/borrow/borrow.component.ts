@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Book } from '../books/book';
 import { BooksService } from '../books/books.service';
 
@@ -9,10 +10,11 @@ import { BooksService } from '../books/books.service';
   styleUrls: ['./borrow.component.scss']
 })
 export class BorrowComponent implements OnInit {
-  booksService: BooksService;
-  book:Book;
+  book: Book;
 
-  constructor(private avRoute: ActivatedRoute,  private router: Router) { }
+  constructor(private avRoute: ActivatedRoute,  private router: Router, private booksService: BooksService) { 
+    this.booksService
+  }
 
   ngOnInit(): void {
     let id = this.avRoute.snapshot.paramMap.get('id');
@@ -33,7 +35,7 @@ export class BorrowComponent implements OnInit {
     };
     this.booksService.borrowBook(this.book.id,book)
     .subscribe((data) => {
-        this.router.navigate(['/book']);
+        this.router.navigate(['/books']);
     });
   }
 
